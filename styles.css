@@ -4,15 +4,28 @@
     width: 600px;
 }
 
-.flex-container div, .book div {
+.flex-container div {
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: inset 0px 0px 0px 1px #fff;
-    padding: 5px;
     height: 50px;
-    flex: 1 1 290px;
+}
+
+.box {
+    flex: 1 1 100%;
+}
+
+.book {
     background-color: aqua;
+    padding-left: 20px;
+    padding-right: 20px;
+    flex: 2 1 70%;
+}
+
+.selections {
+    background-color: green;
+    flex: 1 1 30%;
 }
 
 .label {
