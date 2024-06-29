@@ -1,7 +1,18 @@
 .flex-container {
     display: flex;
     flex-wrap: wrap;
-    width: 600px;
+}
+
+@media (max-width: 992px) {
+    .flex-container {
+        width: 100%;
+    }
+}
+
+@media (min-width: 992px) {
+    .flex-container {
+        width: 50%;
+    }
 }
 
 .flex-container div {
