@@ -10,12 +10,12 @@
     <dialog>
         <strong>Enter book details.</strong>
         <form id="form">
-            <label for="title">Title: <input type="text" id="title" name="title" class="label" required></label><br/>
-            <label for="author">Author: <input type="text" id="author" name="author" class="label" required></label><br/>
-            <label for="pages">No. of pages: <input type="number" id="pages" name="pages" class="label" required></label>
-            <div>
+            <label for="title">Title: <input id="title" class="label" type="text" name="title"></label><br/>
+            <label for="author">Author: <input type="text" id="author" name="author" class="label"></label><br/>
+            <label for="pages">No. of pages: <input type="text" id="pages" name="pages" class="label"></label>
+            <div id="read-div">
                 Read?:
-                <input type="radio" id="read" name="read-yet" value="read" required><label for="read">Read</label>
+                <input type="radio" id="read" name="read-yet" value="read"><label for="read">Read</label>
                 <input type="radio" id="not-read" name="read-yet" value="not read"><label for="not-read">Not read</label>
             </div>
             <button type="submit" id="submit">Submit</button> <button type="reset" id="reset">Reset</button> <button type="button" id="close">Close</button>

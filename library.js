@@ -117,24 +117,122 @@ const bookList = document.querySelector('#container');
 const dialog = document.querySelector('dialog');
 const newBookButton = document.querySelector('#new-book');
 const form = document.querySelector('#form');
+const resetButton = document.querySelector('#reset');
 const closeButton = document.querySelector('#close');
 
 newBookButton.addEventListener('click', () => dialog.showModal());
 form.addEventListener('submit', submitForm);
+resetButton.addEventListener('click', () => readYet = false);
 closeButton.addEventListener('click', () => dialog.close());
 
 showBooksInLibrary();
 
-function submitForm(event) {
-    const title = document.querySelector('#title');
-    const author = document.querySelector('#author');
-    const pages = document.querySelector('#pages');
-    const readYet = document.querySelector('input[name=read-yet]:checked');
+const title = document.querySelector('#title');
+const author = document.querySelector('#author');
+const pages = document.querySelector('#pages');
+const read = document.querySelector('#read');
+const notRead = document.querySelector('#not-read');
 
-    addBookToLibrary(new Book(title.value, author.value, pages.value, readYet.value));
-    dialog.close();
-    bookList.appendChild(createBook(myLibrary[myLibrary.length - 1], myLibrary.length - 1));
-    // myLibrary[myLibrary.length - 1] -> Access the just-added Book object (last element in myLibrary)
-    // myLibrary.length - 1 -> Access the index of last element in myLibrary
+let readYet = false; // Store the value of the selected radio button.
+
+function submitForm(event) {
+    // Make the setCustomValidity() message appear when the form is submitted, but the information is missing.
+    const titleOK = checkTitle(true);
+    const authorOK = checkAuthor(true);
+    const pagesOK = checkPages(true);
+    const readOK = checkRead(true);
+
+    // Make the setCustomValidity() message appear the first time the form is submitted, but the information is missing.
+    read.reportValidity()
+    pages.reportValidity();
+    author.reportValidity();
+    title.reportValidity();
+
+    if (titleOK && authorOK && pagesOK && readOK) {
+        addBookToLibrary(new Book(title.value, author.value, pages.value, readYet));
+        dialog.close();
+        bookList.appendChild(createBook(myLibrary[myLibrary.length - 1], myLibrary.length - 1));
+        // myLibrary[myLibrary.length - 1] -> Access the just-added Book object (last element in myLibrary)
+        // myLibrary.length - 1 -> Access the index of last element in myLibrary
+    }
+
     event.preventDefault();
 }
+
+function checkTitle(submitted = false) {
+    if (!title.value) {
+        title.setCustomValidity("Title cannot be empty.");
+    } else {
+        title.setCustomValidity("");
+
+        if (submitted) {
+            return true;
+        }
+    }
+}
+
+function checkAuthor(submitted = false) {
+    if (!author.value) {
+        author.setCustomValidity("Author cannot be empty.");
+    } else {
+        author.setCustomValidity("");
+
+        if (submitted) {
+            return true;
+        }
+    }
+}
+
+function checkPages(submitted = false) {
+    if (!pages.value) {
+        pages.setCustomValidity("Pages cannot be empty.");
+    } else if (pages.value < 1) {
+        pages.setCustomValidity("The number of pages needs to be 1 or higher.");
+    } else if (!Number(pages.value)) {
+        pages.setCustomValidity("The number of pages needs to be a number.");
+    } else {
+        pages.setCustomValidity("");
+
+        if (submitted) {
+            return true;
+        }
+    }
+}
+
+function checkRead(submitted = false) {
+    if (!read.checked && !notRead.checked) {
+        read.setCustomValidity("Select whether the book has been read.");
+    } else {
+        if (read.checked) {
+            readYet = read.value;
+        } else if (notRead.checked) {
+            readYet = notRead.value;
+        }
+
+        read.setCustomValidity("");
+        
+        if (submitted) {
+            return true;
+        }
+    }
+}
+
+title.addEventListener('input', () => {
+    checkTitle();
+});
+
+author.addEventListener('input', () => {
+    checkAuthor();
+});
+
+pages.addEventListener('input', () => {
+    checkPages();
+});
+
+read.addEventListener('click', () => {
+    checkRead();
+})
+
+notRead.addEventListener('click', () => {
+    checkRead();
+})
