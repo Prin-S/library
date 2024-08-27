@@ -11,17 +11,17 @@
         <strong>Enter book details.</strong>
         <form id="form">
             <label for="title">Title: <input id="title" class="label" type="text" name="title"></label><br/>
-            <label for="author">Author: <input type="text" id="author" name="author" class="label"></label><br/>
-            <label for="pages">No. of pages: <input type="text" id="pages" name="pages" class="label"></label>
+            <label for="author">Author: <input id="author" class="label" type="text" name="author"></label><br/>
+            <label for="pages">No. of pages: <input id="pages" class="label" type="text" name="pages"></label>
             <div id="read-div">
                 Read?:
-                <input type="radio" id="read" name="read-yet" value="read"><label for="read">Read</label>
-                <input type="radio" id="not-read" name="read-yet" value="not read"><label for="not-read">Not read</label>
+                <input id="read" type="radio" name="read-yet" value="read"><label for="read">Read</label>
+                <input id="not-read" type="radio" name="read-yet" value="not read"><label for="not-read">Not read</label>
             </div>
-            <button type="submit" id="submit">Submit</button> <button type="reset" id="reset">Reset</button> <button type="button" id="close">Close</button>
+            <button id="submit" type="submit">Submit</button> <button id="reset" type="reset">Reset</button> <button id="close" type="button">Close</button>
         </form>
     </dialog>
     <button id="new-book">New Book</button>
-    <div id="container" class="flex-container"></div>      
+    <div id="container" class="flex-container"></div>
 </body>
 </html>
